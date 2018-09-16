@@ -1,0 +1,90 @@
+#include <iostream>
+#include <sstream>
+#include <string.h>
+#include <stdio.h>
+#include <array>
+
+using namespace std;
+
+class arrayStack {
+    private:
+        int *array;
+        int size;
+    
+    public: 
+        // by default array is going to have 10 int elements 
+        arrayStack();
+        arrayStack(int initialSize);
+        arrayStack(const arrayStack &original);
+        ~DynamicArray();
+        int getElement(int index);
+        void setElement(int index, int value);
+        int getSize();
+        void resize(int newSize);
+        void addElement(int index, int element);
+        void removeElement(int index);
+};
+
+int main() {
+    arrayStack array;
+    array = new arrayStack(5);
+    for (int i = 0; i < array->size(); i++) {
+        array->addElement(i,i);
+    }
+
+    for (int i = 0; i < array->size(); i++) {
+        cout << array->getElement(i) << " ";
+    }
+    return 0;
+}
+
+arrayStack::arrayStack() {
+    arrayStack::arrayStack(10);
+}
+
+arrayStack::arrayStack(int initialSize) {
+    size = initialSize;
+    array = new int[size];
+    for (int i = 0; i < size; i++) {
+        array[i]= 0;
+    }
+}
+
+arrayStack::arrayStack(const arrayStack &original) {
+    size = original.size;
+    array = new int[size];
+    for (int i = 0; i < size; i++) {
+        array[i]= original.array[i;
+    }
+}
+
+arrayStack::~arrayStack() {
+    delete[] array;
+}
+
+void arrayStack::addElement(int index, int value) {
+    array[index] = value;
+}
+
+int arrayStack::getElement(int index) {
+    return array[index];
+}
+
+int arrayStack::getSize() {
+    return size;
+}
+
+void arrayStack::resize(int newSize) {
+    if (newSize > size) {
+        int *temp;
+        temp = new int [newSize];
+        for(int i = 0; i < newSize; i++) {
+            temp[i] = array[i];
+        }
+        delete array;
+        array = temp;
+        size = newSize;
+    } else {
+        cout << "make sure your new size is larger than the current size of the array"<< endl;
+    }   
+}
